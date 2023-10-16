@@ -1,5 +1,6 @@
 package candidatura;
 
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ProcessoSeletivo {
@@ -9,7 +10,37 @@ public class ProcessoSeletivo {
         // analisarCandidato(2000);
         // analisarCandidato(2200.0);
         // selecaoCandidatos();
-        imprimindoSelecionados();
+        // imprimindoSelecionados();
+    }
+
+    static void entrandoEmContato(String candidato) {
+        int tentativasRealizadas = 1;
+        boolean continuarTentando = true;
+        boolean atendeu = false;
+        // util quando queremos executar o valor final e só apos isso finalizar o while
+        // ? (vejo que a mesma logica e possivel com for,foreach,while preciso estudar
+        // mais suas diferenças)
+        do {
+            atendeu = atender();
+            continuarTentando = !atendeu;
+            if (continuarTentando) {
+                tentativasRealizadas++;
+            } else {
+                System.out.println("CONTATO REALIZADO COM SUCESSO");
+            }
+        } while (continuarTentando && tentativasRealizadas < 3);
+
+        if (atendeu) {
+            System.out.println("CONSEGUIMOS CONTATO COM " + candidato + "NA TENTATIVA: " + tentativasRealizadas);
+        } else {
+            System.out.println("NAO CONSEGUIMOS CONTATO COM " + candidato);
+        }
+    }
+
+    static boolean atender() {
+        // se um valor randomico de 1 a 3 for igual a 1 retorne true, caso contrario
+        // retorne false.
+        return new Random().nextInt(3) == 1;
     }
 
     static void imprimindoSelecionados() {
